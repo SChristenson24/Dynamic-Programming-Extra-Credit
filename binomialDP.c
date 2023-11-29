@@ -5,6 +5,7 @@
    Sources/Notes:
    * Class slides
    * Referenced GeeksforGeeks, StackOverflow, and Spiceworks
+   * Systems programming notes for timeval
    */
 
 #include <stdio.h>

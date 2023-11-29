@@ -1,37 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Returns value of Binomial Coefficient C(n, k)
-int binomialCoeffUtil(int n, int k, int** dp) {
-    // If value in lookup table then return
+int binomial(int n, int k, int **dp)
+{
+    // if value in lookup table
     if (dp[n][k] != -1)
         return dp[n][k];
 
-    // store value in a table before return
-    if (k == 0 || k == n) {
+    // store value in table
+    if (k == 0 || k == n)
+    {
         dp[n][k] = 1;
         return dp[n][k];
     }
 
-    // save value in lookup table before return
-    dp[n][k] = binomialCoeffUtil(n - 1, k - 1, dp) + binomialCoeffUtil(n - 1, k, dp);
+    // save value in table
+    dp[n][k] = binomial(n - 1, k - 1, dp) + binomial(n - 1, k, dp);
     return dp[n][k];
 }
 
-int binomialCoeff(int n, int k) {
-    // Allocate memory for the lookup table
-    int** dp = (int**)malloc((n + 1) * sizeof(int*));
-    for (int i = 0; i <= n; i++) {
-        dp[i] = (int*)malloc((k + 1) * sizeof(int));
-        for (int j = 0; j <= k; j++) {
-            dp[i][j] = -1; // Initialize the lookup table with -1
+int binomialCoeff(int n, int k)
+{
+    // allocate mem for table
+    int **dp = (int **)malloc((n + 1) * sizeof(int *));
+    for (int i = 0; i <= n; i++)
+    {
+        dp[i] = (int *)malloc((k + 1) * sizeof(int));
+        for (int j = 0; j <= k; j++)
+        {
+            dp[i][j] = -1; // initialize the table with -1
         }
     }
 
-    int result = binomialCoeffUtil(n, k, dp);
+    int result = binomial(n, k, dp);
 
-    // Free the memory allocated for the lookup table
-    for (int i = 0; i <= n; i++) {
+    // free the mem for table
+    for (int i = 0; i <= n; i++)
+    {
         free(dp[i]);
     }
     free(dp);
@@ -39,7 +44,8 @@ int binomialCoeff(int n, int k) {
     return result;
 }
 
-int main() {
+int main()
+{
     int n, k;
     printf("Please input n: ");
     scanf("%d", &n);

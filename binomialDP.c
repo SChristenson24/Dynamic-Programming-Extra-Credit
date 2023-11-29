@@ -1,6 +1,16 @@
+/* Name: Sydney Christenson                                                NetID: sac771
+
+   Assignment:Extra Credit Programming Assignment                          Due Date: Wednesday, Nov. 29
+
+   Sources/Notes:
+   * Class slides
+   * Referenced GeeksforGeeks, StackOverflow, and Spiceworks
+   */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <time.h>
+#include <sys/time.h>
 
 int fmin(int a, int b);
 
@@ -42,6 +52,13 @@ int binomial(int n, int k) // calc bionomial
     return result;
 }
 
+long time()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (long)tv.tv_sec * 1000000 + tv.tv_usec;
+}
+
 int fmin(int a, int b)
 {
     return (a < b) ? a : b;
@@ -54,7 +71,20 @@ int main()
     scanf("%d", &n);
     printf("Please input k: ");
     scanf("%d", &k);
-    printf("C(%d, %d) is %d\n", n, k, binomial(n, k));
+
+    // start time
+    long sTime = time();
+
+    int result = binomial(n, k);
+
+    // end time
+    long eTime = time();
+
+    // total time
+    long totalTime = eTime - sTime;
+
+    printf("c(%d, %d) is %d\n", n, k, result);
+    printf("Time: %ld microseconds\n", totalTime);
 
     return 0;
 }
